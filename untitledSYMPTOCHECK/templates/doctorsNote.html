@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Notes - Health Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: #f4f9f7;
+            color: #333;
+        }
+
+        .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+        /* Main content */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h1 {
+            color: #084237;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#084237,#0ca68b);
+            color: #fff;
+            flex-shrink: 0;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #084237;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #084237;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0a5b4a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #084237;
+            color: #fff;
+        }
+
+        .action-btn {
+            background: #084237;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 2px;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #0a5b4a;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background: #084237;
+            color: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navbar -->
+<div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+        <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Doctor Notes</h1>
+
+    <!-- Add Note Form -->
+    <div class="card">
+        <div class="card-icon">📝</div>
+        <h2>Add Doctor Note</h2>
+        <form id="noteForm">
+            <label for="noteTitle">Title</label>
+            <input type="text" id="noteTitle" required>
+
+            <label for="noteDate">Date</label>
+            <input type="date" id="noteDate" required>
+
+            <label for="noteDesc">Description</label>
+            <textarea id="noteDesc" rows="4" required></textarea>
+
+            <button type="submit">Add Note</button>
+        </form>
+    </div>
+
+    <!-- Notes Table -->
+    <div class="card">
+        <div class="card-icon">📋</div>
+        <h2>Saved Notes</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="notesTable">
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        © 2025 Health Portal - Doctor Notes
+    </footer>
+</div>
+
+<script>
+    const noteForm = document.getElementById('noteForm');
+    const notesTable = document.getElementById('notesTable');
+    let notes = [];
+
+    function renderNotes() {
+        notesTable.innerHTML = '';
+        notes.forEach((note, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${note.title}</td>
+                <td>${note.date}</td>
+                <td>${note.desc}</td>
+                <td>
+                    <button class="action-btn" onclick="editNote(${index})">Edit</button>
+                    <button class="action-btn" onclick="deleteNote(${index})">Delete</button>
+                </td>
+            `;
+            notesTable.appendChild(row);
+        });
+    }
+
+    noteForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('noteTitle').value;
+        const date = document.getElementById('noteDate').value;
+        const desc = document.getElementById('noteDesc').value;
+
+        notes.push({ title, date, desc });
+        renderNotes();
+        noteForm.reset();
+    });
+
+    function deleteNote(index) {
+        notes.splice(index, 1);
+        renderNotes();
+    }
+
+    function editNote(index) {
+        const note = notes[index];
+        document.getElementById('noteTitle').value = note.title;
+        document.getElementById('noteDate').value = note.date;
+        document.getElementById('noteDesc').value = note.desc;
+        notes.splice(index, 1);
+        renderNotes();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Tracker - Health Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: #f4f9f7;
+            color: #333;
+        }
+
+        /* Sidebar Navbar */
+        .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+
+
+        /* Main content */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h1 {
+            color: #084237;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#084237,#0ca68b);
+            color: #fff;
+            flex-shrink: 0;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #084237;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #084237;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0a5b4a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #084237;
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background: #084237;
+            color: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navbar -->
+<div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+         <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Medication Tracker</h1>
+
+    <!-- Add Medication Form -->
+    <div class="card">
+        <div class="card-icon">💊</div>
+        <h2>Add Medication</h2>
+        <form id="medForm">
+            <label for="medName">Medication Name</label>
+            <input type="text" id="medName" required>
+
+            <label for="medTime">Time (HH:MM)</label>
+            <input type="time" id="medTime" required>
+
+            <button type="submit">Add Medication</button>
+        </form>
+    </div>
+
+    <!-- Medication Table -->
+    <div class="card">
+        <div class="card-icon">⏰</div>
+        <h2>Scheduled Medications</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Medication</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody id="medTable">
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        © 2025 Health Portal - Medication Tracker
+    </footer>
+</div>
+
+<script>
+    const medForm = document.getElementById('medForm');
+    const medTable = document.getElementById('medTable');
+    let medications = [];
+
+    medForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('medName').value;
+        const time = document.getElementById('medTime').value;
+
+        medications.push({ name, time });
+        updateTable();
+        medForm.reset();
+    });
+
+    function updateTable() {
+        medTable.innerHTML = '';
+        medications.forEach(med => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${med.name}</td><td>${med.time}</td>`;
+            medTable.appendChild(row);
+        });
+    }
+
+    // Medication alert check
+    setInterval(() => {
+        const now = new Date();
+        const currentTime = now.toTimeString().slice(0,5);
+        medications.forEach(med => {
+            if(med.time === currentTime) {
+                alert(`Time to take: ${med.name}`);
+            }
+        });
+    }, 60000); // check every minute
+</script>
+
+</body>
+</html>

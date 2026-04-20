@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Resources - Health Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: #f4f9f7;
+            color: #333;
+        }
+
+        /* Sidebar Navbar */
+       .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+
+
+        /* Main content */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h1 {
+            color: #084237;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #084237;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#084237,#0ca68b);
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* Flowchart container */
+        .flowchart {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: #0ca68b;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 140px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #084237;
+        }
+
+        .flow-step:last-child::after {
+            content: '';
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background: #084237;
+            color: white;
+            border-radius: 8px;
+        }
+
+        @media(max-width:600px){
+            .flowchart {flex-direction: column; align-items: center;}
+            .flow-step::after {display: none;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navbar -->
+<div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+        <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Emergency Resources</h1>
+
+    <!-- Important Contacts -->
+    <div class="card ">
+        <div class="card-icon">☎️</div>
+
+        <div>
+            <h2>Important Contacts (India)</h2>
+            <ul>
+                <li>Ambulance: 102</li>
+                <li>Senior Citizen Helpline: 14567</li>
+                <li>Blood Services: 104</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Safety Measures -->
+    <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div>
+            <h2>Safety Measures & Guidelines</h2>
+            <ul>
+                <li>Keep emergency numbers accessible.</li>
+                <li>Learn basic first aid and CPR.</li>
+                <li>Keep a first-aid kit at home and in vehicles.</li>
+                <li>Follow evacuation plans in case of disasters.</li>
+                <li>Use caution and call emergency services in accidents.</li>
+                <li>Prepare emergency supplies: water, food, torch, medications.</li>
+                <li>Inform family/friends of your location in emergencies.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Emergency Flowchart -->
+    <h2>Emergency Action Flow</h2>
+    <div class="flowchart">
+        <div class="flow-step">Identify Emergency 🚨</div>
+        <div class="flow-step">Call Relevant Services 📞</div>
+        <div class="flow-step">Provide First Aid 🩹</div>
+        <div class="flow-step">Reach Safe Location 🏠</div>
+        <div class="flow-step">Follow-up Care 🏥</div>
+    </div>
+
+    <footer>
+        © 2025 Health Portal - Emergency Resources
+    </footer>
+</div>
+
+</body>
+</html>

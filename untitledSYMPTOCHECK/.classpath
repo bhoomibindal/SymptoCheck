@@ -1,0 +1,34 @@
+project/
+│── app.py
+│── models/
+│   └── svc.pkl
+│── datasets/
+│   ├── symtoms_df.csv
+│   ├── precautions_df.csv
+│   ├── workout_df.csv
+│   ├── description.csv
+│   ├── medications.csv
+│   └── diets.csv
+│── templates/
+│   ├── index.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── developer.html
+│   ├── blog.html
+│   ├── Symptomchecker.html
+│   ├── doctorsNote.html
+│   ├── Emergency.html
+│   ├── FAQ.html
+│   ├── healthAi.html
+│   ├── healthEducation.html
+│   ├── HealthTracker.html
+│   ├── medicationTracker.html
+│   └── MentalWellbeing.html
+│── static/
+    ├── coverimg.png
+    ├── emergencyresource.png
+    ├── icons8-ai-chip-48.png
+    ├── img.png
+    ├── target_1414316(1).png
+    ├── ux.png
+    └── style.css

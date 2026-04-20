@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Portal</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          height: 100vh;
+          overflow: hidden;
+        }
+
+
+
+     .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+
+
+
+
+
+
+        /* Welcome Content */
+        .content {
+          margin-left: 220px; /* same as sidebar width */
+          margin-top: 96px; /* below header */
+          height: calc(100vh - 96px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 20px;
+          overflow-y: auto;
+        }
+
+        .brand {
+          margin-top:0;
+          background: #084237;
+          color: #fff;
+          padding: 16px 20px;
+          border-radius: 16px;
+          font-size: 1.4rem;
+          font-weight: 700;
+          box-shadow: 0 8px 20px rgba(8,66,55,0.12);
+          display: inline-block;
+          margin-bottom: 20px;
+        }
+
+        .content h1 {
+          font-size: 2.2rem;
+          color: #084237;
+          margin: 24px 0 12px;
+        }
+
+        .content p {
+          max-width: 600px;
+          margin: 0 auto 28px;
+          font-size: 1.1rem;
+          color: #274c46;
+        }
+
+        .hero-img {
+          width: 100%;
+          max-width: 420px;
+          border-radius: 14px;
+          box-shadow: 0 8px 20px rgba(8,66,55,0.12);
+          transition: transform 350ms ease, box-shadow 350ms;
+          cursor: pointer;
+        }
+
+        .hero-img:hover {
+          transform: translateY(-14px) scale(1.05);
+          box-shadow: 0 20px 40px rgba(8,66,55,0.18);
+        }
+
+        .cta {
+          display:inline-block;
+          margin-top:26px;
+          padding:12px 22px;
+          border-radius:12px;
+          background:#084237;
+          color:#fff;
+          text-decoration:none;
+          font-weight:600;
+          transition:transform 300ms;
+        }
+
+        .cta:hover {
+          transform:translateY(-6px);
+        }
+
+        footer {
+          margin-top:40px;
+          color:#274c46;
+          font-size:0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+        <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- Welcome Content -->
+<div class="content">
+
+    <h1>Welcome to Your Health Companion</h1>
+    <p>Track symptoms, learn preventive tips, and take the right steps towards better health with AI-powered insights.</p>
+    <img src="../static/coverimg.png" alt="Healthcare illustration" class="hero-img">
+    <br>
+    <a href="{{ url_for('about') }}" class="cta">Get Started</a>
+    <footer>© SymptoCheck — Designed with care</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Health Portal</title>
+    <style>
+        :root {
+          --primary: #084237;
+          --light: #f7f9f8;
+          --accent: #1c7c68;
+          --text: #333;
+        }
+
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin: 0;
+          display: flex;
+          background: var(--light);
+          color: var(--text);
+        }
+
+        /* Sidebar navigation */
+      .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+
+
+        /* Main content area */
+        .main-content {
+          margin-left: 220px;
+          padding: 20px;
+          flex: 1;
+        }
+
+        header {
+          background: var(--accent);
+          color: white;
+          padding: 30px;
+          border-radius: 15px;
+          text-align: center;
+        }
+
+        header h1 {
+          margin: 0;
+          font-size: 2rem;
+        }
+
+        header p {
+          margin-top: 8px;
+          font-size: 1.1rem;
+          opacity: 0.9;
+        }
+
+        h2 {
+          color: var(--primary);
+          text-align: center;
+          margin: 25px 0;
+        }
+
+        .faq-item {
+          background: white;
+          border-radius: 12px;
+          margin: 15px 0;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          overflow: hidden;
+          transition: transform 0.2s ease;
+        }
+
+        .faq-item:hover {
+          transform: translateY(-4px);
+        }
+
+        .faq-question {
+          padding: 15px 20px;
+          background: var(--primary);
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          position: relative;
+        }
+
+        .faq-question::after {
+          content: '+';
+          position: absolute;
+          right: 20px;
+          font-size: 1.2rem;
+        }
+
+        .faq-item.active .faq-question::after {
+          content: '-';
+        }
+
+        .faq-answer {
+          padding: 15px 20px;
+          display: none;
+          line-height: 1.6;
+          background: #fff;
+          color: var(--text);
+        }
+
+        footer {
+          background: var(--primary);
+          color: white;
+          text-align: center;
+          padding: 12px;
+          margin-top: 40px;
+          border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navbar -->
+
+<div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+         <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <header>
+        <h1>Frequently Asked Questions</h1>
+        <p>Your quick guide to common queries</p>
+    </header>
+
+    <h2>Quick Answers</h2>
+
+    <div class="faq-item">
+        <div class="faq-question">What is this health portal about?</div>
+        <div class="faq-answer">This portal helps you track your wellbeing, manage medications, record doctor notes, and access emergency resources — all in one place.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How do I track my health daily?</div>
+        <div class="faq-answer">Go to the Health Tracker page, where you can log exercise, food, mood, and get summaries of your progress.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Can I add reminders for medications?</div>
+        <div class="faq-answer">Yes, the Medication Tracker lets you log your medicines and schedule reminders for doses.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Is my data private?</div>
+        <div class="faq-answer">Your information is stored securely in your browser (localStorage) for this demo. For real apps, secure cloud databases with encryption are used.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Can I access this on mobile?</div>
+        <div class="faq-answer">Yes! The website is designed to be fully responsive and mobile-friendly.</div>
+    </div>
+
+    <footer>
+        <p>© 2025 Health Portal - FAQ Page</p>
+    </footer>
+</div>
+
+<script>
+    // FAQ toggle script
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+        const answer = q.nextElementSibling;
+        answer.style.display = (answer.style.display === "block") ? "none" : "block";
+      });
+    });
+</script>
+
+</body>
+</html>

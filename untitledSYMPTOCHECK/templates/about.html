@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SymptoCheck — App Section</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          display: flex;
+        }
+
+        .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logo-img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+ .sidebar {
+          width: 240px;
+          background-color: #084237;
+          color: #fff;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+         flex-direction: column;
+          padding-top: 20px;
+        }
+        .sidebar h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .sidebar a {
+          padding: 15px 20px;
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          transition: background 0.3s;
+        }
+        .sidebar a:hover {
+          background-color: #0a5b4a;
+        }
+
+
+        /* App Section content */
+        .content {
+          margin-left: 240px;
+          width: calc(100% - 240px);
+        }
+
+        #app {
+          padding: 80px 20px;
+          background: linear-gradient(135deg, #084237, #0b604e);
+          color: white;
+          text-align: center;
+        }
+
+        #app h2 {
+          font-size: 2.5rem;
+          margin-bottom: 15px;
+        }
+
+        #app p {
+          font-size: 1.2rem;
+          max-width: 700px;
+          margin: 0 auto 40px auto;
+          line-height: 1.6;
+        }
+
+        .features {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 25px;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+
+        .feature-card {
+          background: white;
+          color: #084237;
+          padding: 25px 20px;
+          border-radius: 15px;
+          box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+          text-align: center;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .feature-card img {
+          width: 60px;
+          margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+        }
+
+        .feature-card p {
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar --><div class="sidebar">
+     <div class="logo text-center mb-3">
+    <img src="../static/img.png" alt="Logo" class="logo-img">
+     </div>
+
+
+     <a href="{{ url_for('about') }}" class="active">about</a>
+        <a href="{{ url_for('symptomchecker') }}">Symptom Checker</a>
+       <a href="{{ url_for('mentalWellbeing') }}">Mental Wellbeing</a>
+        <a href="{{ url_for('FAQ') }}">FAQ</a>
+        <a href="{{ url_for('Emergency') }}">Emergency Resources</a>
+        <a href="{{ url_for('medicationTracker') }}">Medication Tracker</a>
+        <a href="{{ url_for('doctorsNote') }}">Doctor Notes</a>
+        <a href="{{ url_for('healthEducation') }}">Health Education</a>
+
+</div>
+
+<!-- App Section -->
+<div class="content">
+    <section id="app">
+        <h2>Our Health Website</h2>
+        <p>
+            "Welcome to SymptoCheck - your AI-powered health companion.
+            Easily check your symptoms and receive reliable insights for both physical and mental health.
+            Stay informed and supported with secure, user-friendly guidance at your fingertips."
+        </p>
+
+        <div class="features">
+            <div class="feature-card">
+                <img src="../static/icons8-ai-chip-48.png" alt="Doctor">
+                <h3>AI Symptom Analysis</h3>
+                <p>SGet quick, reliable health insights powered by advanced medical APIs.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" alt="Appointment">
+                <h3>Mental Health Support</h3>
+                <p>Access resources and guidance for emotional well-being.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="../static/ux.png" alt="Wellness">
+                <h3>User-Friendly Interface</h3>
+                <p>Simple design for easy navigation and symptom checking.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="../static/forth.png" alt="Support">
+                <h3>Personalized Suggestions</h3>
+                <p>Receive tailored recommendations based on your symptoms and health inputs.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
